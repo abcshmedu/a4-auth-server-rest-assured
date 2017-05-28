@@ -25,7 +25,7 @@ public class UserStorage {
 
     private final List<User> users;
 
-    private UserStorage() {
+    public UserStorage() {
         this.users = new LinkedList<>();
     }
 
