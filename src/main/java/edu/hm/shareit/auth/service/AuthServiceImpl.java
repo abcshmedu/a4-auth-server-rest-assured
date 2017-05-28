@@ -26,11 +26,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthServiceResult signUp(User user) {
-        return null;
-    }
-
-    @Override
     public AuthServiceResult login(User user) {
         return null;
     }

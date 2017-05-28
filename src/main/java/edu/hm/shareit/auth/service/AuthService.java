@@ -14,8 +14,6 @@ import edu.hm.shareit.auth.model.User;
  */
 public interface AuthService {
 
-    AuthServiceResult signUp(User user);
-
     AuthServiceResult login(User user);
 
     AuthServiceResult logout(String username);

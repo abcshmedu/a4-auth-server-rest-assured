@@ -31,14 +31,6 @@ public class Api {
     }
 
     @POST
-    @Path("/signup")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response signup(User user) {
-        return null;
-    }
-
-    @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,11 +45,10 @@ public class Api {
         return null;
     }
 
-    @POST
-    @Path("/validate")
+    @GET
+    @Path("/validate/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response validate(String jwtToken) {
+    public Response validate(@PathParam("jwt") String jwtToken) {
         return null;
     }
 }

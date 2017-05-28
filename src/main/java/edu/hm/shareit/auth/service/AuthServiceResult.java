@@ -11,4 +11,6 @@ package edu.hm.shareit.auth.service;
  * @since 18.05.17
  */
 public class AuthServiceResult {
+
+    
 }
