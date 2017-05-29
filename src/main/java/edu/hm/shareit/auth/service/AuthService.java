@@ -16,8 +16,7 @@ public interface AuthService {
 
     AuthServiceResult login(User user);
 
-    AuthServiceResult logout(String username);
+    AuthServiceResult logout(String username, String jwtToken);
 
     AuthServiceResult validate(String jwtToken);
-
 }

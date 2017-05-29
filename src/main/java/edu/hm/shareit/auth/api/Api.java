@@ -3,6 +3,7 @@ package edu.hm.shareit.auth.api;
 import edu.hm.shareit.auth.model.User;
 import edu.hm.shareit.auth.service.AuthService;
 import edu.hm.shareit.auth.service.AuthServiceImpl;
+import edu.hm.shareit.auth.service.AuthServiceResult;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -35,20 +36,23 @@ public class Api {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(User user) {
-        return null;
+        AuthServiceResult result = authService.login(user);
+        return Response.status(result.getCode()).entity(result.getContent()).build();
     }
 
     @GET
-    @Path("/logout/{username}")
+    @Path("/logout/{username}/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response logout(@PathParam("username") String username) {
-        return null;
+    public Response logout(@PathParam("username") String username, @PathParam("jwt") String jwt) {
+        AuthServiceResult result = authService.logout(username, jwt);
+        return Response.status(result.getCode()).entity(result.getMsg()).build();
     }
 
     @GET
     @Path("/validate/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response validate(@PathParam("jwt") String jwtToken) {
-        return null;
+        AuthServiceResult result = authService.validate(jwtToken);
+        return Response.status(result.getCode()).entity(result.getMsg()).build();
     }
 }

@@ -27,6 +27,7 @@ public class JwtEngine {
     public static JwtEngine getDefault() {
         return INSTANCE;
     }
+
     private final TokenStorage tokenStorage = TokenStorage.getDefault();
 
     public String generateJwt(String username) {
@@ -40,12 +41,16 @@ public class JwtEngine {
         return jwt;
     }
 
-    public void invalidateJwt(String jwt) {
+    public boolean invalidateJwt(String username, String jwt) {
         try {
             final String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwt).getBody().getSubject();
-            tokenStorage.removeToken(user);
+            if (user.equals(username)) {
+                tokenStorage.removeToken(username);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
-
+            return false;
         }
     }
 

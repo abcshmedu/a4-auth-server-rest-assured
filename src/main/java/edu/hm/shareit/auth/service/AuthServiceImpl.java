@@ -29,20 +29,19 @@ public class AuthServiceImpl implements AuthService {
     public AuthServiceResult login(User user) {
         final User dbUser = userStorage.getUser(user.getUsername());
         if (!user.getPassword().equals(dbUser.getPassword())) {
-            // TODO: return unauth
-            return null;
+            return AuthServiceResult.UNAUTHORIZED;
         }
         final String jwt = JwtEngine.getDefault().generateJwt(user.getUsername());
-        return null;
+        return new AuthServiceResult(200, "OK", jwt);
     }
 
     @Override
-    public AuthServiceResult logout(String username) {
-        return null;
+    public AuthServiceResult logout(String username, String jwtToken) {
+        return JwtEngine.getDefault().invalidateJwt(username, jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
     }
 
     @Override
     public AuthServiceResult validate(String jwtToken) {
-        return null;
+        return JwtEngine.getDefault().checkValidity(jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
     }
 }
