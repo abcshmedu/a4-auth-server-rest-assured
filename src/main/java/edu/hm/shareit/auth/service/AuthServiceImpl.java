@@ -16,32 +16,39 @@ import edu.hm.shareit.auth.storage.UserStorage;
 public class AuthServiceImpl implements AuthService {
 
     private final UserStorage userStorage;
+    
+    private final JwtEngine jwtEngine;
 
     public AuthServiceImpl() {
-        this.userStorage = UserStorage.getDefault();
+    	this(UserStorage.getDefault());
+    }
+    
+    public AuthServiceImpl(UserStorage userStorage) {
+        this(userStorage, JwtEngine.getDefault());
     }
 
-    public AuthServiceImpl(UserStorage userStorage) {
+    public AuthServiceImpl(UserStorage userStorage, JwtEngine jwtEngine) {
         this.userStorage = userStorage;
+        this.jwtEngine = jwtEngine;
     }
 
     @Override
     public AuthServiceResult login(User user) {
         final User dbUser = userStorage.getUser(user.getUsername());
-        if (!user.getPassword().equals(dbUser.getPassword())) {
-            return AuthServiceResult.UNAUTHORIZED;
+        if(dbUser == null || !user.getPassword().equals(dbUser.getPassword())) {
+        	return AuthServiceResult.UNAUTHORIZED;
         }
-        final String jwt = JwtEngine.getDefault().generateJwt(user.getUsername());
+        final String jwt = jwtEngine.generateJwt(user.getUsername());
         return new AuthServiceResult(200, "OK", jwt);
     }
 
     @Override
     public AuthServiceResult logout(String username, String jwtToken) {
-        return JwtEngine.getDefault().invalidateJwt(username, jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
+        return jwtEngine.invalidateJwt(username, jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
     }
 
     @Override
     public AuthServiceResult validate(String jwtToken) {
-        return JwtEngine.getDefault().checkValidity(jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
+        return jwtEngine.checkValidity(jwtToken) ? AuthServiceResult.OK : AuthServiceResult.UNAUTHORIZED;
     }
 }

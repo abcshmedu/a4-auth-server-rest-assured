@@ -27,8 +27,16 @@ public class JwtEngine {
     public static JwtEngine getDefault() {
         return INSTANCE;
     }
+    
+    public JwtEngine() {
+    	this.tokenStorage = TokenStorage.getDefault();
+    }
+    
+    public JwtEngine(TokenStorage tokenStorage) {
+    	this.tokenStorage = tokenStorage;
+    }
 
-    private final TokenStorage tokenStorage = TokenStorage.getDefault();
+    private final TokenStorage tokenStorage;
 
     public String generateJwt(String username) {
         final long expiration = (new Date().getTime()) + EXPIRATION_DURATION;
