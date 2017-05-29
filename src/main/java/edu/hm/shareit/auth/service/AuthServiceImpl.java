@@ -27,6 +27,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthServiceResult login(User user) {
+        final User dbUser = userStorage.getUser(user.getUsername());
+        if (!user.getPassword().equals(dbUser.getPassword())) {
+            // TODO: return unauth
+            return null;
+        }
+        final String jwt = JwtEngine.generateJwt(user.getUsername());
         return null;
     }
 

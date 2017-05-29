@@ -12,5 +12,13 @@ package edu.hm.shareit.auth.service;
  */
 public class AuthServiceResult {
 
-    
+    private int code;
+    private String msg;
+    private String content;
+
+    public AuthServiceResult(int code, String msg, String content) {
+        this.code = code;
+        this.msg = msg;
+        this.content = content;
+    }
 }
