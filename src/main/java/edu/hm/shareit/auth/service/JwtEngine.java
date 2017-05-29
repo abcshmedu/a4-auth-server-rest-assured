@@ -37,7 +37,7 @@ public class JwtEngine {
                 .setExpiration(new Date(expiration))
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
-        tokenStorage.UpdateToken(username, jwt);
+        tokenStorage.updateToken(username, jwt);
         return jwt;
     }
 
