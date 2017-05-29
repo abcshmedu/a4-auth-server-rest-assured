@@ -15,6 +15,14 @@ public class UserTest {
 	}
 	
 	@Test
+	public void toStringTest2() {
+		assertEquals(
+				"User{username='', password=''}",
+				new User().toString()
+		);
+	}
+		
+	@Test
 	public void gettersTest() {
 		User user = new User("user", "password");
 		assertEquals("user", user.getUsername());

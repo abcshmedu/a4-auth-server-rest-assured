@@ -18,8 +18,7 @@ public class User {
     private final String password;
 
     public User() {
-        this.username = "";
-        this.password = "";
+        this("", "");
     }
 
     public User(String username, String password) {
