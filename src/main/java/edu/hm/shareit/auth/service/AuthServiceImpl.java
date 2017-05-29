@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
             // TODO: return unauth
             return null;
         }
-        final String jwt = JwtEngine.generateJwt(user.getUsername());
+        final String jwt = JwtEngine.getDefault().generateJwt(user.getUsername());
         return null;
     }
 
