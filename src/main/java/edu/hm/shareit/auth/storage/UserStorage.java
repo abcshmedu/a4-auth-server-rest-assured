@@ -27,6 +27,7 @@ public class UserStorage {
 
     public UserStorage() {
         this.users = new LinkedList<>();
+        users.add(new User("bob", "42"));
     }
 
     public void addUser(User user) {
