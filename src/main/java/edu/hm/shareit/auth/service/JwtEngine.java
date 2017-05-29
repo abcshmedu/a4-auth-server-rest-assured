@@ -1,9 +1,3 @@
-/*
- * Wolfgang Gabler
- *
- * Software: Mac OS X 10.12, Oracle Java 1.8.0_111 SE
- * System: Intel Core i7-4850HQ, 16 GByte RAM
- */
 package edu.hm.shareit.auth.service;
 
 import edu.hm.shareit.auth.storage.TokenStorage;
@@ -15,6 +9,7 @@ import io.jsonwebtoken.SignatureException;
 import java.util.Date;
 
 /**
+ * JWT Engine.
  * @author Wolfgang Gabler, wgabler@hm.edu
  * @author Andrea Limmer, limmer@hm.edu
  * @since 29.05.17
@@ -25,20 +20,36 @@ public class JwtEngine {
     private static final String SECRET = "this-is-a-very-easy-secret";
     private static final long EXPIRATION_DURATION = 60 * 30 * 1000;
 
+    /**
+     * Get the default JwtEngine.
+     * @return default JWT Engine.
+     */
     public static JwtEngine getDefault() {
         return INSTANCE;
     }
     
+    /**
+     * Constructor.
+     */
     public JwtEngine() {
-    	this.tokenStorage = TokenStorage.getDefault();
+        this.tokenStorage = TokenStorage.getDefault();
     }
     
+    /**
+     * Constructor.
+     * @param tokenStorage custom TokenStorage.
+     */
     public JwtEngine(TokenStorage tokenStorage) {
-    	this.tokenStorage = tokenStorage;
+        this.tokenStorage = tokenStorage;
     }
 
     private final TokenStorage tokenStorage;
 
+    /**
+     * Generate a new JWT token based on the username.
+     * @param username Username.
+     * @return String with the JWT token.
+     */
     public String generateJwt(String username) {
         final long expiration = (new Date().getTime()) + EXPIRATION_DURATION;
         final String jwt = Jwts.builder()
@@ -50,6 +61,12 @@ public class JwtEngine {
         return jwt;
     }
 
+    /**
+     * Invalidate an existing JWT token.
+     * @param username Username.
+     * @param jwt JWT token.
+     * @return Boolean if token was invalidated.
+     */
     public boolean invalidateJwt(String username, String jwt) {
         try {
             final String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwt).getBody().getSubject();
@@ -63,6 +80,11 @@ public class JwtEngine {
         }
     }
 
+    /**
+     * Check validity of a JWT token.
+     * @param token JWT token.
+     * @return Boolean if token is valid.
+     */
     public boolean checkValidity(String token) {
         try {
             final String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
