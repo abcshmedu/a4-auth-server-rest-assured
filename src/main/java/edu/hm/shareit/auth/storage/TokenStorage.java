@@ -23,11 +23,11 @@ public class TokenStorage {
 
     private final Map<String, String> tokens;
 
-    private TokenStorage() {
+    public TokenStorage() {
         this.tokens = new HashMap<>();
     }
 
-    public void UpdateToken(String username, String token) {
+    public void updateToken(String username, String token) {
         tokens.put(username, token);
     }
 
@@ -37,5 +37,9 @@ public class TokenStorage {
 
     public void removeToken(String username) {
         tokens.remove(username);
+    }
+    
+    public Map<String, String> getTokens() {
+    	return tokens;
     }
 }
