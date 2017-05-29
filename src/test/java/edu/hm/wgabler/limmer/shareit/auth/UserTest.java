@@ -15,7 +15,7 @@ public class UserTest {
 	}
 	
 	@Test
-	public void toStringTest2() {
+	public void toStringTestEmptyUser() {
 		assertEquals(
 				"User{username='', password=''}",
 				new User().toString()
