@@ -16,6 +16,7 @@ import java.util.Date;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 29.05.17
  */
 public class JwtEngine {

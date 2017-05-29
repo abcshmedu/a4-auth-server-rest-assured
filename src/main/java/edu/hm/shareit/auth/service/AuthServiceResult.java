@@ -12,6 +12,7 @@ import edu.hm.shareit.auth.model.User;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 18.05.17
  */
 public class AuthServiceResult {

@@ -11,6 +11,7 @@ import edu.hm.shareit.auth.storage.UserStorage;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 18.05.17
  */
 public class AuthServiceImpl implements AuthService {

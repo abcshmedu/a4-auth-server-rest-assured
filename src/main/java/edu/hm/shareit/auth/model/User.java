@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 18.05.17
  */
 public class User {
